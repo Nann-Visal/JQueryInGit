@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>ReanWeb JS</title>
+</head>
+<body>
+    <div class="container-fluid bar1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg12 menu-box">
+                    <ul>
+                        <li><a href="#" id="btn-menu">
+                            <i class="fa-solid fa-bars"></i>
+                        </a> </li>
+                        <li><a href="">
+                            <i class="fa-solid fa-house"></i>
+                        </a> </li>
+                        <!-- <li><a href="">Tesla</a>
+                            <ul class="sub-menu">
+                                <li><a href="">Tesla1</a></li>
+                                <li><a href="">Tesla2</a></li>
+                                <li><a href="">Tesla3</a></li>
+                            </ul>
+                        </li>
+                         -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="phone-menu">
+        <ul>
+            <!-- <li><a href="">Tesla</a></li> -->
+        </ul>
+    </div>
+    <div class="container data-container">
+        <div class="row">
+            <div class="col-xl-3 left-menu">
+                <div class="box">
+                    <ul>
+                        <!--<li>
+                            <a href='#'class='m1'><i class="fa-solid fa-plus"></i></a>
+                            <div class="left-sub-menu">
+                                <ul>
+                                    <li><a href="">Tesla1</a></li>
+                                    <li><a href="">Tesla2</a></li>
+                                    <li><a href="">Tesla3</a></li>
+                                </ul>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-9 slide-container">
+                <div class="slide-box">
+                    <!-- <div class="slide">
+                        <img src="images/1.jfif" alt="">
+                    </div> -->
+                    <div class="btnSlide btnBack">
+                        Back
+                    </div>
+                    <div class="btnSlide btnNext">
+                        Next
+                    </div>
+                    <div class="pagination">
+                        <ul>
+                            <!-- <li>1</li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div c>
+    
+    </div>
+    <div class="container item-container">
+        <div class="row">
+            <!-- <div class="col-xl-3 item-box">
+                <div class="box2">
+                    <img src="images/1.jfif" alt="">
+                    <h2>1</h2>
+                </div>
+            </div> -->
+            
+        </div>
+    </div>
+    <div class="container" style="padding-top:100px; padding-bottom:100px">
+        <div class="row">
+            <div class="col-xl-4">
+                <select name="" id="txt-city" class="form-control"></select>
+            </div>
+            <div class="col-xl-4">
+                <select name="" id="txt-district" class="form-control"></select>
+            </div>
+            <div class="col-xl-4">
+                <select name="" id="txt-communune" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+    <div class="fri-box">
+        <ul>
+            <li class="title-box"><a >Freinds-List</a></li>
+            <!-- <li><a href="" >
+                <img src="images/1.jfif" alt=""><span>Tesla</span>
+            </a></li> -->
+        </ul>
+    </div>
+    <div class="chat-container">
+        <!-- <div class="chat-box">
+            <div class="chat-title-box">
+                <img src="images/1.jfif" alt=""><span>Tesla</span>
+                <i class="fa-solid fa-rectangle-xmark btnClose"></i>
+            </div>
+        </div> -->
+    </div>
+</body>
+<script>
+    var popup = `<div class='popup'></div>`;
+    const cityLists = [
+        {
+            "name":"Phnom Penh",
+            "district":[
+                {
+                    "name":"Chomkar Mon",
+                    "code":"1201",
+                    "communune":[
+                        {"name":"CM1"},
+                        {"name":"CM2"}
+                    ]
+                },
+                {
+                    "name":"Doun Penh",
+                    "code":"1202",
+                    "communune":[
+                        {"name":"DP1"},
+                        {"name":"DP2"}
+                    ]
+                },
+                {
+                    "name":"Toul Kok",
+                    "code":"1203",
+                    "communune":[
+                        {"name":"TK1"},
+                        {"name":"TK2"}
+                    ]
+                }
+            ]
+        },
+        {
+            "name":"Stung Treng",
+            "district":[
+                {
+                    "name":"Seasan",
+                    "code":"19-01",
+                    "communune":[
+                        {"name":"ST1"},
+                        {"name":"ST2"}
+                    ]
+                },
+                {
+                    "name":"Siem Buok",
+                    "code":"19-02",
+                    "communune":[
+                        {"name":"SB1"},
+                        {"name":"SB2"}
+                    ]
+                },
+                {
+                    "name":"Siem Pang",
+                    "code":"19-03",
+                    "communune":[
+                        {"name":"SP1"},
+                        {"name":"SP2"}
+                    ]
+                }
+            ]
+        },
+        {
+            "name":"Siem Reap",
+            "district":[
+                {
+                    "name":"S1",
+                    "code":"19-01",
+                    "communune":[
+                        {"name":"SM1"},
+                        {"name":"SM2"}
+                    ]
+                },
+                {
+                    "name":"S2",
+                    "code":"19-02",
+                    "communune":[
+                        {"name":"SR2-1"},
+                        {"name":"SR2-2"}
+                    ]
+                },
+                {
+                    "name":"S3",
+                    "code":"19-03",
+                    "communune":[
+                        {"name":"SR3-1"},
+                        {"name":"SR3-2"}
+                    ]
+                }
+            ]
+        }
+    ];
+    const items = [
+        {
+            "id":"1",
+            "name":"Tesla",
+            "img":"images/1.jfif",
+            "img2":"images/1.jfif",
+            "sub-menu":["Tesal1","Tesla2","Tesla3"]
+        },
+        {
+            "id":"2",
+            "name":"Apple",
+            "img":"images/2.jfif",
+            "img2":"images/2.jfif",
+            "sub-menu":["Apple1","Apple2","Apple3"]
+        },
+        {
+            "id":"3",
+            "name":"Google",
+            "img":"images/3.jfif",
+            "img2":"images/3.jfif",
+            "sub-menu":["Google1","Goole2","Google3"]
+        },
+        {
+            "id":"4",
+            "name":"Meta",
+            "img":"images/4.jfif",
+            "img2":"images/4.jfif",
+            "sub-menu":["Meta1","Meta2","Meta3"]
+        },
+        {
+            "id":"5",
+            "name":"Microsoft",
+            "img":"images/5.jfif",
+            "img2":"images/5.jfif",
+            "sub-menu":["Microsoft1","Microsoft2","Microsoft3"]
+        },
+        {
+            "id":"6",
+            "name":"Wavnav",
+            "img":"images/6.jfif",
+            "img2":"images/6.jfif",
+            "sub-menu":["Wavnav1","Wavnav2","Wavnav3"]
+        },
+        {
+            "id":"7",
+            "name":"Nokia",
+            "img":"images/7.jfif",
+            "img2":"images/7.jfif",
+            "sub-menu":["Nokia1","Nokia2","Nokia3"]
+        },
+        {
+            "id":"8",
+            "name":"CodeAlian",
+            "img":"images/8.jfif",
+            "img2":"images/8.jfif",
+            "sub-menu":["CodeAlian1","CodeAlian2","CodeAlian3"]
+        },
+        {
+            "id":"9",
+            "name":"Alibaba",
+            "img":"images/9.jfif",
+            "img2":"images/9.jfif",
+            "sub-menu":["Alibaba1","Alibaba2","Alibaba3"]
+        },
+        {
+            "id":"10",
+            "name":"CodeAlian",
+            "img":"images/8.jfif",
+            "img2":"images/8.jfif",
+            "sub-menu":["CodeAlian1","CodeAlian2","CodeAlian3"]
+        },
+        {
+            "id":"11",
+            "name":"Alibaba",
+            "img":"images/9.jfif",
+            "img2":"images/9.jfif",
+            "sub-menu":["Alibaba1","Alibaba2","Alibaba3"]
+        },
+        {
+            "id":"12",
+            "name":"CodeAlian",
+            "img":"images/8.jfif",
+            "img2":"images/8.jfif",
+            "sub-menu":["CodeAlian1","CodeAlian2","CodeAlian3"]
+        },
+    ];
+    $(document).ready(function(){
+
+        getMenu();
+        function getMenu(){
+           var menu ='';
+           for(i=0;i<5;i++){
+               var submenu = items[i]['sub-menu'];
+               var txt = '';
+               for(j in submenu){
+                   txt += `
+                    <li><a href="">${submenu[j]}</a></li>
+                   `
+               }
+              menu += `
+                <li><a href="">${items[i]['name']}</a>
+                    <ul class="sub-menu">
+                        ${txt}
+                    </ul>
+                </li>
+              `;
+           }
+           $('.menu-box').find('ul').append(menu);
+        }
+       
+        getPhoneMenu();
+        function getPhoneMenu(){
+            var phone_menu = '';
+            for(i=0;i<5;i++){
+                phone_menu +=`
+                    <li><a href="">${items[i]['name']}</a></li>
+                `;
+            }
+            $('.phone-menu').find('ul').html(phone_menu);
+        }
+
+        $('#btn-menu').click(function(){
+            $('.phone-menu').css({'left':'0px'});
+            $('body').append(popup);
+        });
+
+        $('body').on('click','.popup',function(){
+            $(this).remove();
+            $('.phone-menu').css({'left':'-250px'});
+        });
+
+        getLeftMenu();
+        function getLeftMenu(){
+            var leftMenu = '';
+            for(i=0;i<8;i++){
+               leftMenu +=`
+                <li><a href='#'class='m1'>${items[i]['name']}<i class="fa-solid fa-plus"></i></a></li>
+               `;
+            }
+            $('.box').find('ul').append(leftMenu);
+        }
+        $('.left-menu').on('click','.m1',function(){
+            var eThis = $(this);
+            var parents = eThis.parent();
+            var ind = parents.index();
+            var subMenu = items[ind]['sub-menu'];
+            if(parents.find('.left-sub-menu').length == 0){
+                var txt = '';
+                for(i in subMenu){
+                txt +=`
+                    <li><a href="">${subMenu[i]}</a></li>    
+                `;
+                }
+                eThis.find('i').removeClass('fa-solid fa-plus');
+                eThis.find('i').addClass('fa-solid fa-minus');
+                parents.append(
+                    `
+                        <div class="left-sub-menu">
+                            <ul>
+                                ${txt}
+                            </ul>
+                        </div>
+                    `
+                );
+            }else{
+                if(parents.find('.fa-plus').length>0){
+                    eThis.find('i').removeClass('fa-solid fa-plus');
+                    eThis.find('i').addClass('fa-solid fa-minus');
+                    parents.find('.left-sub-menu').slideDown(800);
+                }else{
+                    eThis.find('i').removeClass('fa-solid fa-minus');
+                    eThis.find('i').addClass('fa-solid fa-plus');
+                    parents.find('.left-sub-menu').slideUp(800);
+                }
+            }
+        });
+        
+        getImgSlide();
+        function getImgSlide(){
+            var  txt = '';
+            var txtli = '';
+            for(i in items){
+                txt +=`
+                    <div class="slide">
+                        <img src="${items[i]['img']}" alt="">
+                    </div>
+                `;
+                txtli +=`
+                    <li>${items[i]['id']}</li>
+                `;
+            }
+            $('.slide-box').append(txt);
+            $('.slide-box').find('.pagination').append(`
+                <ul>
+                    ${txtli}
+                </ul>
+            `);
+            $('.pagination').find('li').eq(0).addClass('active');
+
+        }
+        var slideInd = 0;
+        var slide = $('.slide');
+        var numSlide = slide.length;
+        slide.hide();
+        slide.eq(slideInd).show();
+        $('.btnNext').click(function(){
+            slide.eq(slideInd).hide();
+            $('.pagination').find('li').eq(slideInd).removeClass('active');
+            slideInd++;
+            if(slideInd>=numSlide){
+                slideInd = 0;
+            }
+            slide.eq(slideInd).show();
+            $('.pagination').find('li').eq(slideInd).addClass('active');
+        });   
+        $('.btnBack').click(function(){
+            slide.eq(slideInd).hide();
+            $('.pagination').find('li').eq(slideInd).removeClass('active');
+            slideInd--;
+            if(slideInd<0){
+                slideInd = numSlide-1;
+            }
+            slide.eq(slideInd).show();
+            $('.pagination').find('li').eq(slideInd).addClass('active');
+        }); 
+        
+        var myAutoSlide = setInterval(
+            function (){$('.btnNext').click()},
+            3000
+        );
+        $('.slide-box').mouseover(
+            function(){               
+                clearInterval(myAutoSlide);
+            }
+        );
+        $('.slide-box').mouseout( function(){
+            myAutoSlide = setInterval(
+                function (){$('.btnNext').click()},
+                3000
+            )
+        });
+        $('.pagination').on('click','ul li',function(){
+            slide.eq(slideInd).hide();
+            $('.pagination').find('li').eq(slideInd).removeClass('active');
+            slideInd = $(this).index();
+            slide.eq(slideInd).show();
+            $('.pagination').find('li').eq(slideInd).addClass('active');
+        });
+
+        getImgList();
+        function getImgList(){
+            var txt = '';
+            for(i in items){
+                txt += `
+                    <div class="col-xl-3 item-box">
+                        <div class="box2">
+                            <img src="${items[i]['img2']}" alt="">
+                            <h2>${items[i]['name']}</h2>
+                        </div>
+                    </div>
+                `;
+            }
+            $('.item-container').find('.row').append(txt);
+        }
+
+        $('.item-container').on('click','.item-box',function(){
+            var ind = $(this).index();
+            var img2 = items[ind]['img2'];
+            var frm = `
+                <div class="popup1">
+                        <div class="frm">
+                            <div class="btn-close"><i class="fa-solid fa-rectangle-xmark"></i></div>
+                            <img src="${img2}" alt="">
+                        </div>
+                </div>`;
+            $('body').append(frm);
+        });
+        $('body').on('click','.frm .btn-close',function(){
+            $('.popup1').remove();
+        });
+
+        getCity();
+        function getCity(){
+            let txt = `<option value="-1">Select City</option>`;
+            cityLists.forEach((e,i)=>{
+                txt +=`
+                    <option value="${i}">${e['name']}</option>
+                `;
+            })
+            $('#txt-city').html(txt);
+        }
+
+        $('#txt-city').change(function(){
+            let ind = $(this).val();
+            const myDistricts = cityLists[ind]['district'];
+            var txt = '<option value="-1">Select District</option>';
+            myDistricts.forEach((e,i)=>{
+                txt +=`
+                    <option value="${i}">${e['name']}</option>
+                `;
+            });
+            $('#txt-district').html(txt);
+        });
+
+        $('#txt-district').change(function(){
+            let indCity = $('#txt-city').val();
+            var myDistricts = cityLists[indCity]['district']
+            let ind = $(this).val();
+            var myCommunune = myDistricts[ind]['communune'];
+            var txt = '<option value="-1">Select Communune</option>';
+            myCommunune.forEach((e,i)=>{
+                txt +=`
+                    <option value="${i}">${e['name']}</option>
+                `;
+            });
+            $('#txt-communune').html(txt);
+        });
+
+        getFriends();
+        function getFriends(){
+            let txt = '';
+            for(i in items){
+                txt +=`
+                    <li><a>
+                        <img src="${items[i]['img2']}" alt=""><span>${items[i]['name']}</span>
+                    </a></li>
+                `;
+            }
+            $('.fri-box').find('ul').append(txt);
+        }
+        var optfrb = 0;
+    
+        $('.fri-box').on('click','li.title-box',function(){
+           if(optfrb == 0){
+                $(this).parents('.fri-box').css({"height":"50px","overflow-y":"hidden"});
+                optfrb = 1;
+            }else{
+                $(this).parents('.fri-box').css({"height":"400px","overflow-y":"scroll"});
+                optfrb = 0;
+            }
+        });
+
+        $('.fri-box').on('click','ul li', function(){
+            var i =0;
+            var eThis = $(this);
+            var name = eThis.find('a span').text();
+            var img = eThis.find('a img').attr('src');
+            var chat=`
+                <div class="chat-box" id="f${eThis.index()}">
+                    <div class="chat-title-box">
+                        <img src="${img}" alt=""><span>${name}</span>
+                        <i class="fa-solid fa-rectangle-xmark btnClose"></i>
+                    </div>
+                </div>
+            `;
+            
+            if(eThis.index()==0){
+                return;
+            }
+
+            if($('.chat-container').find(`#f${eThis.index()}`).length == 0){
+                if($('.chat-container').find('.chat-box').length >2){
+                    $('.chat-container').find('.chat-box').eq(0).remove();
+                }
+                $('.chat-container').append(chat);
+            }
+        });
+
+        $('.chat-container').on('click','.chat-box i.btnClose', function(){
+            $(this).parents('.chat-box').remove();
+        })
+
+    });
+    
+</script>
+</html>
+
