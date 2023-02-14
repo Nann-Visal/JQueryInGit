@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/style2.css">
+    <title>Rean Js</title>
+</head>
+<body>
+    <div class="container-full">
+        <div class="btnAdd" id="btnAdd">
+            Add new
+        </div>
+    </div>
+    <table id="tblData">
+        <tr>
+            <th width="150">Id</th>
+            <th>Name</th>
+            <th width="150">Price</th>
+        </tr>
+        <tr class="trTotal">
+           <td colspan="2">Total</td>
+           <td>0</td>
+        </tr>
+        <!-- <tr>
+            <td width="150">1</td>
+            <td>HTML</td>
+            <td width="150">10</td>
+        </tr>
+        <tr>
+            <td width="150">2</td>
+            <td>CSS</td>
+            <td width="150">20</td>
+        </tr>
+        <tr>
+            <td width="150">3</td>
+            <td>JavaScript</td>
+            <td width="150">30</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>JQuery</td>
+            <td>15</td>
+        </tr> -->
+    </table>
+    
+</body>
+<script>
+    $(document).ready(function(){
+        var txt =`
+            <div class="popup">
+                <div class="frm">
+                    <div class="title-box">
+                    <span> Students form</span>
+                    <i class="fa-solid fa-closed-captioning" id="btnClose"></i>
+                    </div>
+                    <div class="frm-body">
+                        <label for="">Id</label>
+                        <input type="text" name="txt-id" id="txt-id" class="frm-control" readonly >
+                        <label for="">Name</label>
+                        <input type="text" name="txt-name" id="txt-name" class="frm-control">
+                        <label for="">Prices</label>
+                        <input type="text" name="txt-pr" id="txt-pr" class="frm-control">
+                    </div>
+                    <div class="frm-footer">
+                        <div class="btnSave">
+                            Save Data
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        // add-from
+        $('#btnAdd').click(function(){
+            var autoId =$('#tblData').find('tr').length;
+            $('body').append(txt);
+            $('body').find('.frm #txt-id').val(autoId-1);
+        });
+        // close-form
+        $('body').on('click','#btnClose',function(){
+            $('.popup').remove();
+        });
+        // 
+        $('body').on('click','.btnSave',function(){
+            const parent = $(this).parents('.frm');
+            const id     = parent.find('#txt-id');
+            const name   = parent.find('#txt-name');
+            const price  = parent.find('#txt-pr');
+            if(name.val()==''){
+                alert('Please input name.');
+                name.focus();
+                return;
+            }else if(price.val()==''){
+                alert('Please input price.');
+                price.focus();
+                return;
+            }else if($.isNumeric(price.val())==false){
+                alert('Please input number.');
+                return;
+            }
+            var txt    = `
+                <tr>
+                    <td width="150">${id.val()}</td>
+                    <td>${name.val()}</td>
+                    <td width="150">${price.val()}</td>
+                </tr>
+            `;
+            $('#tblData').find('tr.trTotal').before(txt);
+            id.val($('#tblData').find('tr').length);
+            name.val("");
+            price.val("");
+            name.focus();
+            $('#btnClose').click();
+
+            function getTotal(){
+                var numTr = $('#tblData').find('tr').length;
+                var total=0;
+                for(i=1;i<numTr-1;i++){
+                    total +=parseInt($('#tblData').find('tr:eq('+i+') td:eq(2)').text());
+                } 
+                $('#tblData').find('tr.trTotal td:eq(1)').text(total);
+
+            };
+            getTotal();
+        })
+    });
+</script>
+</html>
