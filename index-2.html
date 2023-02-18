@@ -21,37 +21,18 @@
             <th width="150">Id</th>
             <th>Name</th>
             <th width="150">Price</th>
+            <th width="100">Action</th>
         </tr>
         <tr class="trTotal">
            <td colspan="2">Total</td>
            <td>0</td>
         </tr>
-        <!-- <tr>
-            <td width="150">1</td>
-            <td>HTML</td>
-            <td width="150">10</td>
-        </tr>
-        <tr>
-            <td width="150">2</td>
-            <td>CSS</td>
-            <td width="150">20</td>
-        </tr>
-        <tr>
-            <td width="150">3</td>
-            <td>JavaScript</td>
-            <td width="150">30</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>JQuery</td>
-            <td>15</td>
-        </tr> -->
     </table>
     
 </body>
 <script>
     $(document).ready(function(){
-        var txt =`
+        var txts =`
             <div class="popup">
                 <div class="frm">
                     <div class="title-box">
@@ -70,6 +51,9 @@
                         <div class="btnSave">
                             Save Data
                         </div>
+                        <div class="btnEdit">
+                            Save Edit
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,8 +61,10 @@
         // add-from
         $('#btnAdd').click(function(){
             var autoId =$('#tblData').find('tr').length;
-            $('body').append(txt);
+            $('body').append(txts);
             $('body').find('.frm #txt-id').val(autoId-1);
+            $('.btnEdit').hide();
+            $('.btnSave').show();
         });
         // close-form
         $('body').on('click','#btnClose',function(){
@@ -90,6 +76,7 @@
             const id     = parent.find('#txt-id');
             const name   = parent.find('#txt-name');
             const price  = parent.find('#txt-pr');
+            var   btn    = `<input type="button" value="Edit" class='btnEditTB'>`;
             if(name.val()==''){
                 alert('Please input name.');
                 name.focus();
@@ -107,6 +94,7 @@
                     <td width="150">${id.val()}</td>
                     <td>${name.val()}</td>
                     <td width="150">${price.val()}</td>
+                    <td>${btn}</td>
                 </tr>
             `;
             $('#tblData').find('tr.trTotal').before(txt);
@@ -126,7 +114,36 @@
 
             };
             getTotal();
-        })
+
+            var trInd;
+            $('body').on('click','table .btnEditTB',function(){
+                var eThis = $(this);
+                var tr    = eThis.parents('tr');
+                var id    = tr.find('td:eq(0)').text();
+                var name  = tr.find('td:eq(1)').text();
+                var price = tr.find('td:eq(2)').text();
+                    trInd = tr.index();
+                $('body').append(txts);
+                $('.popup').find('#txt-id').val(id);
+                $('.popup').find('#txt-name').val(name);
+                $('.popup').find('#txt-pr').val(price);
+                $('.btnEdit').show();
+                $('.btnSave').hide();
+                
+            });
+
+            $('body').on('click','.btnEdit',function(){
+
+                var   name   = $('body').find('.frm #txt-name').val();
+                var   price  = $('body').find('.frm #txt-pr').val();
+                $('#tblData').find(`tr:eq(${trInd}) td:eq(1)`).text(name);
+                $('#tblData').find(`tr:eq(${trInd}) td:eq(2)`).text(price);
+                $('#tblData').find(`tr:eq(${trInd})`).addClass('active');
+                $('#btnClose').click();
+            });
+        });
+
+
     });
 </script>
 </html>
